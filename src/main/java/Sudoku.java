@@ -83,8 +83,28 @@ class Sudoku {
     // return data type: boolean
     // if putting c in puzzle is a valid move, return true; otherwise false
     public static boolean isSpotValid(char[][] puzzle, int row, int col, char c){
-        // remove this line
-        return true;
+        char [][] temp = deepCopy(puzzle);
+        temp[row][col] = c;
+        if(isParticallyValid(temp, row, 0, row, 8)&&isParticallyValid(temp, 0, col, 8,col)){
+           int cube1 = row/3;
+           cube1 = (cube1+2*cube1);
+           int cube2 = col/3;
+           cube2 = (cube2+2*cube2);
+           if(isParticallyValid(temp, cube1, cube2, cube1+2, cube2+2)){
+               return true;
+            }
+           
+        }
+        return false;
     }
-
+    
+    public static  char [][] deepCopy(char[][] puzzle){
+        char [][] temp = new char [puzzle.length][puzzle[0].length];
+        for(int i = 0; i < puzzle.length; i++){
+            for(int j = 0; j < puzzle[i].length; j++){
+                temp[i][j] = puzzle[i][j];
+            }
+        }
+        return temp;
+    }//returns a deep copy of the puzzle as a temp value
 }
