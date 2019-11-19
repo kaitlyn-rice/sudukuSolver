@@ -3,7 +3,7 @@ import java.util.*;
 class Sudoku {
     // just in case you need tis method for testing
     public static void main(String[] args) {
-        // char[][] puzzle = SudokuP.puzzle();
+        char[][] puzzle = SudokuP.puzzle();
     }
 
     // print out one solution of the given puzzle
@@ -55,8 +55,23 @@ class Sudoku {
     // e.g.3, isParticallyValid(puzzle,0,0,2,2) is used to check the top left 3*3 area
     // NOTE that this method will only be applied to every row, every column, and every 3*3 small areas (9 small areas in total)
     public static boolean isParticallyValid(char[][] puzzle, int x1, int y1,int x2,int y2){
-        // remove this line
-        return true;
+        ArrayList<Character> givens = new ArrayList<Character>();
+        //creates a carrier array list
+        for(int i = x1; i <= x2; i++){
+            //runs through the x values
+            for(int j = y1; j <= y2; j++){
+                //runs through the y values
+                for(int n = 0; n<givens.size(); n++){
+                    if(puzzle[i][j] == givens.get(n)) return false;
+                    //checks to see if the value is the same as any of the other
+                    //values that have already been checked and returns false if it is
+                }
+                givens.add(puzzle[i][j]);
+                //adds the checked value into the array list to be checked against the
+                //rest of the values
+            }
+        }
+        return true; // returns if none of the numbers match
     }
     
     // check whether putting a digit c at the position (x, y) in a given sudoku board
@@ -72,5 +87,4 @@ class Sudoku {
         return true;
     }
 
-    // you are welcome to add more methods
 }
