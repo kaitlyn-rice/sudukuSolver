@@ -86,14 +86,11 @@ class Sudoku {
         char [][] temp = deepCopy(puzzle);
         temp[row][col] = c;
         if(isParticallyValid(temp, row, 0, row, 8)&&isParticallyValid(temp, 0, col, 8,col)){
-           int cube1 = row/3;
-           cube1 = (cube1+2*cube1);
-           int cube2 = col/3;
-           cube2 = (cube2+2*cube2);
-           if(isParticallyValid(temp, cube1, cube2, cube1+2, cube2+2)){
+           int tempRow = row-(row%3);
+           int tempCol = col-(col%3);
+           if (isParticallyValid(temp, tempRow, tempCol, tempRow+2, tempCol+2)) {
                return true;
-            }
-           
+           }
         }
         return false;
     }
@@ -102,7 +99,7 @@ class Sudoku {
         char [][] temp = new char [puzzle.length][puzzle[0].length];
         for(int i = 0; i < puzzle.length; i++){
             for(int j = 0; j < puzzle[i].length; j++){
-                temp[i][j] = puzzle[i][j];
+                puzzle[i][j] = temp[i][j];
             }
         }
         return temp;
