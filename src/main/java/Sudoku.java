@@ -66,7 +66,7 @@ class Sudoku {
                     //checks to see if the value is the same as any of the other
                     //values that have already been checked and returns false if it is
                 }
-                givens.add(puzzle[i][j]);
+                if(puzzle[i][j] != '.') givens.add(puzzle[i][j]);
                 //adds the checked value into the array list to be checked against the
                 //rest of the values
             }
