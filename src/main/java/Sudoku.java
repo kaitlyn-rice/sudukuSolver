@@ -4,6 +4,12 @@ class Sudoku {
     // just in case you need tis method for testing
     public static void main(String[] args) {
         char[][] puzzle = SudokuP.puzzle();
+        char [][] temp = deepCopy(puzzle);
+        
+        int cube1 = 3/3;
+        System.out.println(cube1);
+        cube1 = (cube1+2*cube1);
+        System.out.println(cube1);
     }
 
     // print out one solution of the given puzzle
@@ -36,7 +42,13 @@ class Sudoku {
     // accepted parameter(s): a 2D char array representing a sudoku board
     // return type: boolean
     public static boolean check(char[][] puzzle) {
-        // remove this line
+        for(int row = 0; row <= 8; row++){
+            if(!isParticallyValid(puzzle, row, 0, row, 8)){return false;}
+        }//checks that each of the rows are valid
+        for(int col = 0; col <= 8; col++){
+            if(!isParticallyValid(puzzle, 0, col, 8, col)){return false;}
+        }//checks that each of the columns are valid
+        
         return true;
     }
 
@@ -54,7 +66,7 @@ class Sudoku {
     // e.g.2, isParticallyValid(puzzle,0,0,8,0) is used to check the 1st column of puzzle
     // e.g.3, isParticallyValid(puzzle,0,0,2,2) is used to check the top left 3*3 area
     // NOTE that this method will only be applied to every row, every column, and every 3*3 small areas (9 small areas in total)
-    public static boolean isParticallyValid(char[][] puzzle, int x1, int y1,int x2,int y2){
+        public static boolean isParticallyValid(char[][] puzzle, int x1, int y1,int x2,int y2){
         ArrayList<Character> givens = new ArrayList<Character>();
         //creates a carrier array list
         for(int i = x1; i <= x2; i++){
@@ -95,13 +107,15 @@ class Sudoku {
         return false;
     }
     
+    
     public static  char [][] deepCopy(char[][] puzzle){
         char [][] temp = new char [puzzle.length][puzzle[0].length];
-        for(int i = 0; i < puzzle.length; i++){
-            for(int j = 0; j < puzzle[i].length; j++){
-                puzzle[i][j] = temp[i][j];
+        for(int i = 0; i < temp.length; i++){
+            for(int j = 0; j < temp[i].length; j++){
+                temp[i][j] = puzzle[i][j];
             }
         }
+        
         return temp;
     }//returns a deep copy of the puzzle as a temp value
 }
