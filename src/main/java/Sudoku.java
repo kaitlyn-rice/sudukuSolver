@@ -42,12 +42,17 @@ class Sudoku {
     // accepted parameter(s): a 2D char array representing a sudoku board
     // return type: boolean
     public static boolean check(char[][] puzzle) {
-        for(int row = 0; row <= 8; row++){
-            if(!isParticallyValid(puzzle, row, 0, row, 8)){return false;}
-        }//checks that each of the rows are valid
-        for(int col = 0; col <= 8; col++){
-            if(!isParticallyValid(puzzle, 0, col, 8, col)){return false;}
-        }//checks that each of the columns are valid
+        for(int place = 0; place <= 8; place++){
+            if(!isParticallyValid(puzzle, place, 0, place, 8)){return false;}
+            //checks rows
+            if(!isParticallyValid(puzzle, 0, place, 8, place)){return false;}
+            //checks cols
+        }//checks that each of the rows and cols are valid
+        for(int row =0; row <= 6; row+=3){
+            for(int col = 0; col <= 6; col +=3){
+                if(!isParticallyValid(puzzle,row, col, row+2, col+2)){return false;}
+            }
+        }//checks each of the cubes
         
         return true;
     }
