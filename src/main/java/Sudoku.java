@@ -33,10 +33,23 @@ class Sudoku {
     // return type: boolean
     // NOTE: you can assume that only valid sudoku board will be given as parameters to this method
     public static boolean solveSudoku(char[][] puzzle){
-        // remove this line
-        return true;
-    }   
-
+         for (int row = 0; row < puzzle.length; row++){
+            for(int col = 0; col < puzzle[row].length; col++){
+               if (puzzle[row][col] == '.'){
+                  for(char i = '1'; i <= '9'; i++){
+                     puzzle[row][col] = i;
+                     if(check(puzzle) && solveSudoku(puzzle)){
+                        return true;
+                     }
+                     puzzle[row][col] = '.';                     
+                  }
+                  return false;
+               }
+            }
+         }
+         return true;
+    }
+    
     // check if a given sudoku puzzle board is valid or not
     // return true if valid; otherwise return false
     // accepted parameter(s): a 2D char array representing a sudoku board
@@ -123,4 +136,5 @@ class Sudoku {
         
         return temp;
     }//returns a deep copy of the puzzle as a temp value
+    
 }
