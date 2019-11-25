@@ -4,12 +4,8 @@ class Sudoku {
     // just in case you need tis method for testing
     public static void main(String[] args) {
         char[][] puzzle = SudokuP.puzzle();
-        char [][] temp = deepCopy(puzzle);
         
-        int cube1 = 3/3;
-        System.out.println(cube1);
-        cube1 = (cube1+2*cube1);
-        System.out.println(cube1);
+        solve(puzzle);
     }
 
     // print out one solution of the given puzzle
@@ -19,7 +15,12 @@ class Sudoku {
             return;
         if (solveSudoku(puzzle)) {
             /* print out one possible solution */
-            // your code goes here
+            for(char [] x: puzzle){
+                for(char c: x){
+                    System.out.print(c +", ");
+                }
+                System.out.println();
+            }
 
             
         } else {
