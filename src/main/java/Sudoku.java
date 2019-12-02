@@ -3,9 +3,9 @@ import java.util.*;
 class Sudoku {
     // just in case you need tis method for testing
     public static void main(String[] args) {
-        char[][] puzzle = SudokuP.puzzle();
+        char[][] puzzle = SudokuP.puzzle(); 
         
-        solve(puzzle);
+        solve(puzzle); 
     }
 
     // print out one solution of the given puzzle
@@ -17,7 +17,7 @@ class Sudoku {
             /* print out one possible solution */
             for(char [] x: puzzle){
                 for(char c: x){
-                    System.out.print(c +", ");
+                    System.out.print(c +", "); //prints out each char in the 2D array with a , after 
                 }
                 System.out.println();
             }
@@ -38,8 +38,8 @@ class Sudoku {
             for(int col = 0; col < puzzle[row].length; col++){
                if (puzzle[row][col] == '.'){
                   for(char i = '1'; i <= '9'; i++){
-                     puzzle[row][col] = i;
-                     if(check(puzzle) && solveSudoku(puzzle)){
+                     puzzle[row][col] = i; //checks each possible number in every open spot
+                     if(check(puzzle) && solveSudoku(puzzle)){ //recalls method to find a variation for the entire board and checks board
                         return true;
                      }
                      puzzle[row][col] = '.';                     
@@ -117,9 +117,9 @@ class Sudoku {
         char [][] temp = deepCopy(puzzle);
         temp[row][col] = c;
         if(isParticallyValid(temp, row, 0, row, 8)&&isParticallyValid(temp, 0, col, 8,col)){
-           int tempRow = row-(row%3);
+           int tempRow = row-(row%3); // top left corner of the square
            int tempCol = col-(col%3);
-           if (isParticallyValid(temp, tempRow, tempCol, tempRow+2, tempCol+2)) {
+           if (isParticallyValid(temp, tempRow, tempCol, tempRow+2, tempCol+2)) { //checks entire square
                return true;
            }
         }
